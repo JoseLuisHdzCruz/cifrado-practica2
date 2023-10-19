@@ -7,7 +7,7 @@
             </div>
   
             <div class="card-body p-4 p-sm-5">
-              <h5 class="card-title text-center mb-5 fs-2 font-weight-bold">Encriptación con libreria CryptoJS</h5>
+              <h5 class="card-title text-center mb-5 fs-2 font-weight-bold">Encriptación con libreria CryptoJS - Metodo TripleDES</h5>
   
               <div class="form-floating mb-3">
                 <input v-model="inputText" type="text" class="form-control" required autofocus />
@@ -37,21 +37,21 @@ export default {
   data() {
     return {
       inputText: '',
-      outputText: ''
+      outputText: '',
+      password: 'TuContraseñaSecreta',
     };
   },
   methods: {
-    cifrarTexto() {
-      const clave = 'claveDeCifrado'; // La clave para el cifrado
-      const textoCifrado = CryptoJS.AES.encrypt(this.inputText, clave).toString();
-      this.outputText = textoCifrado;
-    },
-    descifrarTexto() {
-      const clave = 'claveDeCifrado'; // La clave para el cifrado (debe ser la misma que usaste para cifrar)
-      const textoDescifrado = CryptoJS.AES.decrypt(this.inputText, clave).toString(CryptoJS.enc.Utf8);
-      this.outputText = textoDescifrado;
-    }
-  }
+  cifrarTexto() {
+    const textoCifrado = CryptoJS.TripleDES.encrypt(this.inputText, this.password).toString();
+    this.outputText = textoCifrado;
+  },
+  descifrarTexto() {
+    const bytes = CryptoJS.TripleDES.decrypt(this.outputText, this.password);
+    const textoDescifrado = bytes.toString(CryptoJS.enc.Utf8);
+    this.outputText = textoDescifrado;
+  },
+},
 };
 </script>
 
