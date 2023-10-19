@@ -1,4 +1,4 @@
-# cifrado-simetrico-p2
+# practica-cifrado
 
 ## Project setup
 ```
